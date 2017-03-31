@@ -51,7 +51,7 @@ class App extends Component {
             // debugger
             this.putNewSpace(this.state.editing)
         }
-        this.componentWillMount();
+
     }
 
     putNewSpace(space){
@@ -67,10 +67,11 @@ class App extends Component {
         var myInit = { method: 'PUT',
             headers: myHeaders,
             body: JSON.stringify(space)};
-
+        console.log("PUT", this.state.spaces.length);
+        console.log("PUT", this.state.spaces[0]);
         return fetch('/spaces/1', myInit)
             .then(function(response) {
-                self.setState({spaces: {spaces}, editing: {space}, mode:"Index"})
+                self.setState({spaces: spaces, editing: space, mode:"Index"})
                 return response;
             });
     }
@@ -86,7 +87,8 @@ class App extends Component {
         var myInit = { method: 'POST',
             headers: myHeaders,
             body: JSON.stringify(space)};
-
+        console.log("POST", this.state.spaces.length);
+        console.log("POST", this.state.spaces[0]);
         return fetch('/spaces', myInit)
             .then(function(response) {
                 self.setState({editing: {}, mode:"Index"})
@@ -121,7 +123,7 @@ class App extends Component {
     get spaces() {
         console.log("Spaces ",this.state.spaces)
         if(this.state.spaces.length === undefined) {
-            // this.state.spaces = [this.state.editing]
+            this.state.spaces = [this.state.editing]
             // debugger
             console.log(this.state.spaces.length);
             console.log(this.state.spaces[0]);
